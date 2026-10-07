@@ -111,7 +111,14 @@ typedef struct _bfd bfd;
 #define TRUE_FALSE_ALREADY_DEFINED
 #endif /* MPW */
 #ifndef TRUE_FALSE_ALREADY_DEFINED
+#if defined(__cplusplus) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202311L)
+/* C++ always had built-in bool/true/false and C23 added them to C, so the
+   old enum no longer compiles (the names are keywords). A typedef keeps
+   source compatibility for this self-contained build. */
+typedef bool boolean;
+#else
 typedef enum bfd_boolean {false, true} boolean;
+#endif
 #define BFD_TRUE_FALSE
 #else
 /* Use enum names that will appear nowhere else.  */
