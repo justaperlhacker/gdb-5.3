@@ -58,10 +58,11 @@ perror_with_name (char *string)
   extern char *sys_errlist[];
   extern int errno;
 #endif
-  const char *err;
+  const char *err = strerror (errno);
   char *combined;
 
-  err = (errno < sys_nerr) ? sys_errlist[errno] : "unknown error";
+  if (!err)
+    err = "unknown error";
   combined = (char *) alloca (strlen (err) + strlen (string) + 3);
   strcpy (combined, string);
   strcat (combined, ": ");

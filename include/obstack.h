@@ -432,7 +432,7 @@ __extension__								\
 ({ struct obstack *__o = (OBSTACK);					\
    if (__o->next_free + sizeof (int) > __o->chunk_limit)		\
      _obstack_newchunk (__o, sizeof (int));				\
-   *((int *)__o->next_free) = ((int)datum);
+   *((int *)__o->next_free) = ((int)datum);                            \
    __o->next_free += sizeof (int);				\
    (void) 0; })
 

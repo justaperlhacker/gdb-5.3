@@ -25,6 +25,13 @@
 
 #ifdef HAVE_PROC_SERVICE_H
 #include <proc_service.h>
+
+/* Modern glibc <proc_service.h> (via <sys/procfs.h>) provides psaddr_t,
+   prgregset_t, prfpregset_t and lwpid_t, but it no longer provides the
+   older paddr_t alias and the gregset/fpregset typedefs this code was
+   written against.  Provide them for compatibility.  */
+#include "gregset.h"
+typedef psaddr_t paddr_t;
 #else
 
 #ifdef HAVE_SYS_PROCFS_H
